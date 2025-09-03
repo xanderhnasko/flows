@@ -1,0 +1,8 @@
+# Super CC additions:
+# Claude Code specific
+.claude/*.log
+.claude/cache/
+.claude/context/last-build-commit
+.claude/context/summaries/
+.claude/logs/
+.claude/state/
