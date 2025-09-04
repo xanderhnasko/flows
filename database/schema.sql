@@ -5,16 +5,31 @@
 CREATE TABLE sites (
     id SERIAL PRIMARY KEY,
     usgs_site_code VARCHAR(15) UNIQUE NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    river VARCHAR(100) NOT NULL,
-    latitude DECIMAL(10, 7) NOT NULL,
-    longitude DECIMAL(10, 7) NOT NULL,
+    name VARCHAR(255),
+    river VARCHAR(100),
+    latitude DECIMAL(10, 7),
+    longitude DECIMAL(10, 7),
     timezone VARCHAR(50) DEFAULT 'America/Denver',
+    altitude_ft DECIMAL(8, 2),
+    drainage_area_sq_mi DECIMAL(10, 2),
+    
+    -- Parameter availability (dynamically determined)
+    has_flow BOOLEAN DEFAULT FALSE,
+    has_temperature BOOLEAN DEFAULT FALSE,
     has_turbidity BOOLEAN DEFAULT FALSE,
     has_ph BOOLEAN DEFAULT FALSE,
     has_do BOOLEAN DEFAULT FALSE,
+    has_conductivity BOOLEAN DEFAULT FALSE,
+    
+    -- Metadata tracking
     active BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMPTZ DEFAULT NOW()
+    last_metadata_update TIMESTAMPTZ,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    
+    -- Additional USGS metadata
+    huc_code VARCHAR(12),
+    state_code VARCHAR(2),
+    county_code VARCHAR(3)
 );
 
 CREATE TABLE observations_current (
@@ -80,9 +95,20 @@ CREATE TABLE derived_metrics (
     PRIMARY KEY (site_id)
 );
 
+-- Site metadata refresh log
+CREATE TABLE site_metadata_updates (
+    id SERIAL PRIMARY KEY,
+    site_id INTEGER REFERENCES sites(id),
+    update_type VARCHAR(50), -- 'metadata_refresh', 'parameter_discovery', etc.
+    changes_detected JSONB, -- What changed
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- Indexes for performance
 CREATE INDEX idx_obs_current_timestamp ON observations_current(timestamp DESC);
 CREATE INDEX idx_obs_daily_date ON observations_daily(date DESC);
 CREATE INDEX idx_reservoir_releases_timestamp ON reservoir_releases(timestamp DESC);
 CREATE INDEX idx_statistics_daily_day_of_year ON statistics_daily(day_of_year);
 CREATE INDEX idx_sites_active ON sites(active);
+CREATE INDEX idx_sites_metadata_update ON sites(last_metadata_update);
+CREATE INDEX idx_sites_usgs_code ON sites(usgs_site_code);

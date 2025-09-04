@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "db:setup": "psql $DATABASE_URL -f database/schema.sql && psql $DATABASE_URL -f database/seeds/sites.sql",
+    "db:migrate": "psql $DATABASE_URL -f database/migrate.sql",
+    "db:refresh-metadata": "node database/refresh-metadata.js"
   },
   "keywords": [],
   "author": "",

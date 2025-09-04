@@ -1,19 +1,40 @@
--- New Mexico Priority Sites Data
--- Based on plan.MD Tier 1 and Tier 2 sites
+-- New Mexico Stream Monitoring Sites
+-- Minimal seeds - all metadata populated dynamically via USGS API
 
--- Tier 1 - Must Have Sites
-INSERT INTO sites (usgs_site_code, name, river, latitude, longitude, timezone, has_turbidity, has_ph, has_do, active) VALUES
-('09355500', 'San Juan River below Navajo Dam', 'San Juan River', 36.8139, -107.6181, 'America/Denver', TRUE, FALSE, FALSE, TRUE),
-('08279500', 'Rio Grande at Embudo', 'Rio Grande', 36.2072, -105.9636, 'America/Denver', TRUE, FALSE, FALSE, TRUE),
-('08317400', 'Rio Grande below Cochiti Dam', 'Rio Grande', 35.6169, -106.3181, 'America/Denver', TRUE, FALSE, FALSE, TRUE),
-('08378500', 'Pecos River near Pecos', 'Pecos River', 35.7039, -105.6778, 'America/Denver', FALSE, FALSE, FALSE, TRUE);
+-- Core monitoring sites (just site codes - all other data fetched automatically)
+INSERT INTO sites (usgs_site_code, active) VALUES
+-- Original Tier 1 & 2 sites
+('09355500', TRUE), -- San Juan River Near Archuleta, NM
+('08279500', TRUE), -- Rio Grande at Embudo
+('08317400', TRUE), -- Rio Grande below Cochiti Dam
+('08378500', TRUE), -- Pecos River near Pecos
+('08290000', TRUE), -- Rio Chama near Chamita
+('08313000', TRUE), -- Rio Grande at Otowi Bridge
+('08265000', TRUE), -- Red River near Questa
 
--- Tier 2 - High Value Sites  
-INSERT INTO sites (usgs_site_code, name, river, latitude, longitude, timezone, has_turbidity, has_ph, has_do, active) VALUES
-('08290000', 'Rio Chama near Chamita', 'Rio Chama', 36.0719, -106.1139, 'America/Denver', TRUE, FALSE, FALSE, TRUE),
-('08313000', 'Rio Grande at Otowi Bridge', 'Rio Grande', 35.8772, -106.1328, 'America/Denver', TRUE, FALSE, FALSE, TRUE),
-('07211500', 'Cimarron River near Cimarron', 'Cimarron River', 36.5139, -104.9361, 'America/Denver', FALSE, FALSE, FALSE, TRUE),
-('08265000', 'Red River near Questa', 'Red River', 36.7042, -105.5492, 'America/Denver', FALSE, FALSE, FALSE, TRUE);
+-- Additional New Mexico sites
+('08377900', TRUE), -- Rio Mora Near Terrero, NM
+('08276500', TRUE), -- Rio Grande Blw Taos Junction Bridge Near Taos, NM
+('08287000', TRUE), -- Rio Chama Below Abiquiu Dam, NM
+('08263500', TRUE), -- Rio Grande Near Cerro, NM
+('08266820', TRUE), -- Red River Below Fish Hatchery, Near Questa, NM
+('08281400', TRUE), -- Rio Chama Above Chama, NM
+('08282300', TRUE), -- Rio Brazos at Fishtail Road NR Tierra Amarilla, NM
+('08285500', TRUE), -- Rio Chama Below EL Vado Dam, NM
+('08284100', TRUE), -- Rio Chama Near LA Puente, NM
+('08286500', TRUE), -- Rio Chama Above Abiquiu Reservoir, NM
+('07203000', TRUE), -- Vermejo River Near Dawson, NM
+('07211500', TRUE), -- Canadian River Near Taylor Springs, NM
+('08276300', TRUE), -- Rio Pueblo DE Taos Below Los Cordovas, NM
+('08254000', TRUE), -- Costilla Creek Below Costilla Dam, NM
+('08252500', TRUE), -- Costilla Creek Above Costilla Dam, NM
+('09364500', TRUE), -- Animas River at Farmington, NM
+('09365000', TRUE), -- San Juan River at Farmington, NM
+('09367500', TRUE), -- LA Plata River Near Farmington, NM
+('09367000', TRUE), -- LA Plata River at LA Plata, NM
+('09368000', TRUE), -- San Juan River at Shiprock, NM
+('093710009', TRUE), -- Mancos River NR Four Corners, CO
+('09364010', TRUE); -- Animas River Below Aztec, NM
 
 -- Associated Reservoirs
 INSERT INTO reservoirs (name, river, rise_location_id, associated_site_id) VALUES
