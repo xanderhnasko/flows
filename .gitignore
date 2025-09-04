@@ -25,6 +25,10 @@ pids
 logs
 *.log
 
+# Tests
+__tests__/
+
+
 # Claude Code specific
 .claude/*.log
 .claude/cache/
