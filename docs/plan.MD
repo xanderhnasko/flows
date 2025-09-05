@@ -10,7 +10,7 @@ A streamlined web application providing real-time stream conditions for New Mexi
 |--------|------------|------------------|---------|
 | **USGS IV** | Flow (00060), Water Temp (00010), Turbidity (63680/00076) | 5-15 min | Real-time conditions |
 | **USGS DV** | Daily mean flow, temp | Nightly | Historical context |
-| **USGS Statistics** | Daily percentiles (p10-p90) | Monthly | Flow anomaly calculations |
+| **USGS Statistics** | Complete statistical suite: mean, min, max, p05-p95, period of record | Monthly | Enhanced flow anomaly calculations using historical mean |
 | **Reclamation RISE** | Reservoir releases, elevation | Hourly | Release schedules |
 
 ### Opportunistic Parameters

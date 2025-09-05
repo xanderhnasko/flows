@@ -189,12 +189,22 @@ Build robust data collection and processing pipelines with comprehensive error h
 - [ ] Handle backfill for new sites
 - [ ] Implement incremental updates
 
-#### 3.5 Statistics Service
-**Time: 2 hours**
-- [ ] Create monthly job for statistics refresh
-- [ ] Calculate and store daily percentiles (p10-p90) in `statistics_daily`
-- [ ] Handle leap year day-of-year calculations
-- [ ] Implement historical statistics backfill
+#### 3.5 Enhanced Statistics Service ✅ COMPLETED
+**Time: 2 hours** ✅ ENHANCED - Full USGS statistical suite implemented
+- [x] ✅ **ENHANCED**: Capture full USGS statistics (mean, min, max, p05-p95) instead of just p10-p90
+- [x] ✅ Parse RDB format from USGS Statistics API (not JSON as originally planned)
+- [x] ✅ Store historical mean, min, max, period of record, and extreme value years
+- [x] ✅ Handle leap year day-of-year calculations correctly
+- [x] ✅ Implement robust RDB parser with comprehensive error handling
+- [x] ✅ Add database transaction support for batch statistics insertion
+- [x] ✅ Create monthly job capability for statistics refresh
+
+**Major Enhancement - Complete USGS Statistical Suite:**
+- ✅ **Core Statistics**: Historical mean, min, max (better for z-score calculations)
+- ✅ **Full Percentiles**: p05, p10, p20, p25, p50, p75, p80, p90, p95 
+- ✅ **Period Context**: Begin/end years, extreme value years
+- ✅ **Data Quality**: Observation count, data completeness metrics
+- ✅ **Robust Parsing**: RDB format parser with comprehensive error handling
 
 #### 3.6 RISE Reservoir Data Pipeline
 **Time: 2 hours**
